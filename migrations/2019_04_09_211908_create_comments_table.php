@@ -11,10 +11,11 @@ class CreateCommentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('nova_comments', function (Blueprint $table) {
-            $table->increments('id');
-            $table->morphs('commentable');
-            $table->unsignedInteger('commenter_id')->nullable();
+        Schema::create('comments', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->uuidMorphs('commentable');
+            $table->uuid('commented_by')->index();
+            $table->foreign('commented_by')->references('id')->on('users');
             $table->text('comment');
             $table->timestamps();
         });
@@ -25,6 +26,6 @@ class CreateCommentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nova_comments');
+        Schema::dropIfExists('comments');
     }
 }
