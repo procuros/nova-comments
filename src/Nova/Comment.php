@@ -22,21 +22,14 @@ class Comment extends Resource
      */
     public static $model = CommentModel::class;
 
+    public static $globallySearchable = false;
+
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
     public static $title = 'id';
-
-    /**
-     * The columns that should be searched.
-     *
-     * @var array
-     */
-    public static $search = [
-        'comment',
-    ];
 
     /**
      * Get the fields displayed by the resource.
